@@ -9,5 +9,6 @@ WriteMakefile(
         Maypole => 1.4,
         Cache::Cache => 0,
         Class::ISA => 0,
+        Digest::SHA1 => 0,
     }
 );

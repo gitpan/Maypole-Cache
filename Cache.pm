@@ -10,7 +10,7 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 @ISA = qw(Exporter);
 @EXPORT = qw( handler_guts );
 
-$VERSION = '1.1';
+$VERSION = '1.2';
 
 sub handler_guts {
     my $r = shift;
@@ -51,6 +51,7 @@ sub handler_guts {
         $r->model_class->process($r);
     } else {       
         return OK if $r->{output} = $cache->get($key);
+        delete $r->{model_class};
         $r->{path} =~ s{^/}{}; # De-absolutify
         $r->template($r->{path});
     }
