@@ -10,7 +10,7 @@ use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 @ISA = qw(Exporter);
 @EXPORT = qw( handler_guts );
 
-$VERSION = '0.01';
+$VERSION = '1.1';
 
 sub handler_guts {
     my $r = shift;
@@ -34,6 +34,7 @@ sub handler_guts {
 
     no warnings 'uninitialized';
     my $key = "$r->{user}:$r->{path}";
+    $key .= ":".$_."/".$r->{query}{$_} for sort keys %{$r->{query}||{}};
     my $cache = $cache_class->new(\%options);
 
     # Now we're really into the handler guts proper...
